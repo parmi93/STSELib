@@ -1,7 +1,7 @@
 /*!
  ******************************************************************************
  * \file	stsafea_low_power.c
- * \brief   low-power modes services for STSAFE-A
+ * \brief   STSAFE-A services for low-power modes services (source)
  * \author  STMicroelectronics - CS application team
  *
  ******************************************************************************
@@ -16,8 +16,11 @@
  ******************************************************************************
  */
 
-#include "services/stsafea/stsafea_low_power.h"
+/* Includes ------------------------------------------------------------------*/
+#include <stddef.h>
+
 #include "services/stsafea/stsafea_frame_transfer.h"
+#include "services/stsafea/stsafea_low_power.h"
 
 #ifdef STSE_CONF_STSAFE_A_SUPPORT
 
@@ -25,7 +28,6 @@ stse_ReturnCode_t stsafea_hibernate(stse_Handler_t *pSTSE,
                                     stse_hibernate_wake_up_mode_t wake_up_mode)
 
 {
-    (void)wake_up_mode;
     PLAT_UI8 cmd_header = STSAFEA_CMD_HIBERNATE;
     PLAT_UI8 rsp_header;
 
@@ -36,6 +38,7 @@ stse_ReturnCode_t stsafea_hibernate(stse_Handler_t *pSTSE,
     /*- Create CMD frame and populate elements */
     stse_frame_allocate(CmdFrame);
     stse_frame_element_allocate_push(&CmdFrame, eCmd_header, 1, &cmd_header);
+    stse_frame_element_allocate_push(&CmdFrame, e_wake_up_mode, 1, &wake_up_mode);
 
     /*- Create Rsp frame and populate elements*/
     stse_frame_allocate(RspFrame);

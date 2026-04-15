@@ -1,7 +1,7 @@
 /*!
  ******************************************************************************
  * \file	stsafea_put_query.c
- * \brief   Put and query services for STSAFE-A
+ * \brief   STSAFE-A services for put and query (source)
  * \author  STMicroelectronics - CS application team
  *
  ******************************************************************************
@@ -16,8 +16,11 @@
  ******************************************************************************
  */
 
-#include "services/stsafea/stsafea_put_query.h"
+/* Includes ------------------------------------------------------------------*/
+#include <stddef.h>
+
 #include "services/stsafea/stsafea_frame_transfer.h"
+#include "services/stsafea/stsafea_put_query.h"
 
 #ifdef STSE_CONF_STSAFE_A_SUPPORT
 
@@ -95,8 +98,7 @@ stse_ReturnCode_t stsafea_put_i2c_parameters(
 #endif
 
     if (pSTSE->device_type == STSAFE_A100 ||
-        pSTSE->device_type == STSAFE_A110 ||
-        pSTSE->device_type == STSAFE_A200) {
+        pSTSE->device_type == STSAFE_A110) {
         pI2c_parameters->idle_bus_time_to_standby = 0;
     }
 

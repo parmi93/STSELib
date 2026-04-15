@@ -16,6 +16,8 @@
  *****************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
+#include <stddef.h>
+
 #include "api/stse_device_management.h"
 
 /* Exported variables --------------------------------------------------------*/
@@ -122,7 +124,6 @@ stse_ReturnCode_t stse_device_enter_hibernate(stse_Handler_t *pSTSE,
 #ifdef STSE_CONF_STSAFE_A_SUPPORT
     case STSAFE_A100:
     case STSAFE_A110:
-    case STSAFE_A200:
         ret = stsafea_hibernate(pSTSE, wake_up_mode);
         break;
     case STSAFE_A120:
@@ -154,7 +155,6 @@ stse_ReturnCode_t stse_device_power_on(stse_Handler_t *pSTSE) {
     case STSAFE_A100:
     case STSAFE_A110:
     case STSAFE_A120:
-    case STSAFE_A200:
         stse_platform_Delay_ms(stsafea_boot_time[pSTSE->device_type]);
         break;
 #endif /* STSE_CONF_STSAFE_A_SUPPORT */
@@ -200,7 +200,6 @@ stse_ReturnCode_t stse_device_echo(stse_Handler_t *pSTSE, PLAT_UI8 *pIn, PLAT_UI
     case STSAFE_A100:
     case STSAFE_A110:
     case STSAFE_A120:
-    case STSAFE_A200:
         return stsafea_echo(pSTSE, pIn, pOut, size);
 #endif /* STSE_CONF_STSAFE_A_SUPPORT */
     default:
@@ -315,7 +314,6 @@ stse_ReturnCode_t stse_device_reset(stse_Handler_t *pSTSE) {
     case STSAFE_A100:
     case STSAFE_A110:
     case STSAFE_A120:
-    case STSAFE_A200:
         ret = stsafea_reset(pSTSE);
         break;
 #endif /* STSE_CONF_STSAFE_A_SUPPORT */
