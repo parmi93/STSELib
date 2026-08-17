@@ -589,24 +589,15 @@ typedef struct {
 
 extern const stse_ecc_info_t stse_ecc_info_table[];
 
-#if defined(STSE_CONF_ECC_NIST_P_256) || defined(STSE_CONF_ECC_NIST_P_384) || defined(STSE_CONF_ECC_NIST_P_521) ||                \
-    defined(STSE_CONF_ECC_BRAINPOOL_P_256) || defined(STSE_CONF_ECC_BRAINPOOL_P_384) || defined(STSE_CONF_ECC_BRAINPOOL_P_512) || \
-    defined(STSE_CONF_ECC_CURVE_25519) || defined(STSE_CONF_ECC_EDWARD_25519)
-
 /**
  * \brief 		Get ECC key type from curve identifier
- * \details 	This function resolves the ECC key type from a given curve identifier value
- * \param[in]	curve_id_length		Length of the curve identifier
- * \param[in]	pCurve_id_value		Pointer to the curve identifier value
- * \param[out]	pKey_type			Pointer to store the resolved ECC key type
- * \return 		\ref STSE_OK on success ; \ref stse_ReturnCode_t error code otherwise
+ * \details 	This function resolves the ECC key type from a given curve identifier by
+ * 				comparing it against each entry of \ref stse_ecc_info_table.
+ * \param[in]	curve_id	Pointer to the curve identifier (length + value) to resolve
+ * \return 		The matching \ref stse_ecc_key_type_t ;
+ * 				\ref STSE_ECC_KT_INVALID if the curve identifier is not recognized
  */
-stse_ReturnCode_t stse_get_ecc_key_type_from_curve_id(
-    PLAT_UI8 curve_id_length,
-    const PLAT_UI8 *pCurve_id_value,
-    stse_ecc_key_type_t *pKey_type);
-
-#endif
+stse_ecc_key_type_t stse_get_ecc_key_type_from_curve_id(const stsafea_ecc_curve_id_t curve_id[static 1]);
 
 /** \}*/
 
